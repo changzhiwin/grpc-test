@@ -71,6 +71,7 @@ Exchange[ExchangePattern: InOnly, Properties: {grpcResponseObserver=io.grpc.stub
     <td>null</td>
   </tr>
 </table>
+
 ```
 Exchange[ExchangePattern: InOnly, Properties: {grpcResponseObserver=io.grpc.stub.ServerCalls$ServerCallStreamObserverImpl@524ee9dd}, Headers: {CamelGrpcMethodName=listFeatures, CamelGrpcUserAgent=grpc-java-netty/1.40.1, Content-Type=application/grpc}, BodyType: com.example.demo.Rectangle, Body: lo {  latitude: 400000000  longitude: -750000000}hi {  latitude: 420000000  longitude: -730000000}]
 ```
@@ -90,6 +91,7 @@ Exchange[ExchangePattern: InOnly, Properties: {grpcResponseObserver=io.grpc.stub
     <td>onNext</td>
   </tr>
 </table>
+
 ```
 Exchange[ExchangePattern: InOnly, Properties: {}, Headers: {CamelGrpcEventType=onNext, CamelGrpcMethodName=recordRoute, CamelGrpcUserAgent=grpc-java-netty/1.40.1, Content-Type=application/grpc}, BodyType: com.example.demo.Point, Body: latitude: 408472324longitude: -740726046]
 ```
@@ -109,6 +111,7 @@ Exchange[ExchangePattern: InOnly, Properties: {}, Headers: {CamelGrpcEventType=o
     <td>onNext</td>
   </tr>
 </table>
+
 ```
 Exchange[ExchangePattern: InOnly, Properties: {}, Headers: {CamelGrpcEventType=onNext, CamelGrpcMethodName=routeChat, CamelGrpcUserAgent=grpc-java-netty/1.40.1, Content-Type=application/grpc}, BodyType: com.example.demo.RouteNote, Body: location {}message: "First message"]
 ```
@@ -116,7 +119,7 @@ Exchange[ExchangePattern: InOnly, Properties: {}, Headers: {CamelGrpcEventType=o
 # Error take place
 When the `recordRoute` called, a error occurs, like this
 ```
-Cancelling the stream with status Status{code=INTERNAL, description=Too many responses, cause=null}
+2021-10-29 15:14:47.252  WARN 88138 --- [ault-executor-0] io.grpc.internal.ServerCallImpl          : Cancelling the stream with status Status{code=INTERNAL, description=Too many responses, cause=null}
 ```
 I guess the producer of Camel GRPC EndPoint send finish event after frist request, immediately. 
 But I don't know how to prevent this default manner.
